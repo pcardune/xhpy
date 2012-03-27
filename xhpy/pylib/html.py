@@ -37,31 +37,32 @@ class :xhpy:html-element(:x:primitive):
     return id
 
   def renderBaseAttrs(self):
-    buf = '<' + self.tagName
+    buf = u'<' + self.tagName
     attributes = self.getAttributes()
     for key in attributes:
       val = attributes[key]
       if val is not None and val is not False:
-        buf += ' ' + htmlspecialchars(key) + '="' +\
-                     htmlspecialchars(val, True) + '"'
+        buf += u' ' + htmlspecialchars(key) + u'="' +\
+                     htmlspecialchars(val, True) + u'"'
     return buf
 
   def addClass(self, klass):
     klass = klass.strip()
     currentClasses = self.getAttribute('class')
-    tmp = ' ' + currentClasses + ' '
-    has = tmp.find(' ' + klass + ' ')
+    tmp = u' ' + currentClasses + u' '
+    has = tmp.find(u' ' + klass + u' ')
     if has != -1:
       return self
-    tmp = currentClasses + ' ' + klass
+    tmp = currentClasses + u' ' + klass
     self.setAttribute('class', tmp.strip())
     return self
 
   def stringify(self):
-    buf = self.renderBaseAttrs() + '>'
+    buf = self.renderBaseAttrs() + u'>'
     for child in self.getChildren():
-      buf += :x:base.renderChild(child)
-    buf += '</' + self.tagName + '>'
+      c = :x:base.renderChild(child)
+      buf += c
+    buf += u'</' + self.tagName + u'>'
     return buf
 
 class :xhpy:html-singleton(:xhpy:html-element):
@@ -72,7 +73,7 @@ class :xhpy:html-singleton(:xhpy:html-element):
   children empty
 
   def stringify(self):
-    return self.renderBaseAttrs() + ' />'
+    return self.renderBaseAttrs() + u' />'
 
 class :xhpy:pseudo-singleton(:xhpy:html-element):
   """
@@ -86,11 +87,11 @@ class :xhpy:pseudo-singleton(:xhpy:html-element):
     return htmlspecialchars(txt)
 
   def stringify(self):
-    buf = self.renderBaseAttrs() + '>'
+    buf = self.renderBaseAttrs() + u'>'
     children = self.getChildren()
     if children:
       buf += :x:base.renderChild(children[0])
-    return buf + '</' + self.tagName + '>'
+    return buf + u'</' + self.tagName + u'>'
 
 # XHP element definitions
 

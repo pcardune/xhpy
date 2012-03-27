@@ -4,3 +4,4 @@ MANIFEST
 dist/
 xhpy/tests/precompiled/pylib/
 xhpy/tests/precompiled/*.py
+*.egg-info

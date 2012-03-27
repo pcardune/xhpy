@@ -1,11 +1,5 @@
 import os.path
-from distutils.core import setup
-
-# The standard distutils bytecode generation step spits out stacktraces on
-# trying to parse xhpy/pylib/core.py and xhpy/pylib/html.py as Python, so
-# we disable it here.
-import sys
-sys.dont_write_bytecode = True
+from setuptools import setup
 
 ROOT = os.path.abspath(os.path.dirname(__file__))
 setup(
